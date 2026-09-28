@@ -17,7 +17,7 @@ export function Contact() {
   async function copyEmail() {
     try {
       await navigator.clipboard.writeText(EMAIL);
-ecrit      setCopied(true);
+      setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
       /* clipboard unavailable */

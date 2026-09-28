@@ -7,7 +7,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import texture from "@/assets/hero-texture.jpg";
+import portrait from "@/assets/kopal-portrait.jpg";
 import { EASE, Magnetic } from "./primitives";
 
 function MaskedLine({ children, delay }: { children: ReactNode; delay: number }) {
@@ -146,23 +146,23 @@ export function Hero() {
               ref={portraitRef}
               onMouseMove={onPortraitMove}
               onMouseLeave={onPortraitLeave}
-              className="relative aspect-[4/5] overflow-hidden border border-line bg-surface"
+            className="relative aspect-[4/5] overflow-hidden border border-line bg-surface"
             >
               <motion.div style={{ x: mx, y: my }} className="absolute -inset-6">
                 <img
-                  src={texture}
-                  alt="Abstract violet and cyan cinematic texture framing Kopal's portrait"
+                  src={portrait}
+                  alt="Portrait of Kopal Vajpayee"
                   width={1024}
                   height={1280}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover object-top"
                 />
               </motion.div>
-              <div className="absolute inset-0 bg-iris/15 mix-blend-color" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-amber/10 mix-blend-soft-light" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 text-[10px] tracking-[0.3em] text-foreground/70">
                 KOPAL VAJPAYEE — BENGALURU, IN
               </div>
-              <div className="absolute right-4 top-4 border border-line bg-background/40 px-2 py-1 text-[9px] tracking-[0.25em] text-muted-foreground backdrop-blur-sm">
+              <div className="absolute right-4 top-4 border border-amber/40 bg-background/40 px-2 py-1 text-[9px] tracking-[0.25em] text-amber backdrop-blur-sm">
                 EST. 2023 — 2027
               </div>
             </div>

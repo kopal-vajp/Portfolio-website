@@ -78,7 +78,7 @@ export function Hero() {
             </span>
           </motion.div>
 
-          <h1 className="mt-8 font-display text-[clamp(3.4rem,10vw,9rem)] font-extrabold leading-[0.92] tracking-tight">
+          <h1 className="mt-8 font-display text-[clamp(2.7rem,7.4vw,6.3rem)] font-extrabold leading-[0.95] tracking-tight">
             <MaskedLine delay={0.15}>KOPAL</MaskedLine>
             <MaskedLine delay={0.28}>
               VAJPAYEE<span className="text-iris">.</span>

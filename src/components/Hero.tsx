@@ -78,7 +78,7 @@ export function Hero() {
             </span>
           </motion.div>
 
-          <h1 className="mt-8 font-display text-[clamp(2.7rem,7.4vw,6.3rem)] font-extrabold leading-[0.95] tracking-tight">
+          <h1 className="mt-8 font-display text-[clamp(2.6rem,6.5vw,5.4rem)] font-extrabold leading-[0.98] tracking-[-0.02em]">
             <MaskedLine delay={0.15}>KOPAL</MaskedLine>
             <MaskedLine delay={0.28}>
               VAJPAYEE<span className="text-iris">.</span>
@@ -167,7 +167,7 @@ export function Hero() {
               </div>
             </div>
           </motion.div>
-          <div className="pointer-events-none absolute -right-3 top-0 hidden origin-top-right rotate-90 text-[10px] tracking-[0.4em] text-muted-foreground lg:block">
+          <div className="pointer-events-none absolute -left-3 top-0 hidden origin-top-left rotate-90 text-[10px] tracking-[0.4em] text-muted-foreground lg:block">
             PORTFOLIO — 2026
           </div>
         </motion.div>

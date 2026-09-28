@@ -66,7 +66,7 @@ export function About() {
               delay={0.08 * i}
               className={i % 2 === 1 ? "lg:mt-14" : undefined}
             >
-              <div className="font-display text-[clamp(2.6rem,6vw,5rem)] font-extrabold leading-none tracking-tight">
+              <div className="font-display text-[clamp(2.2rem,4.6vw,3.9rem)] font-extrabold leading-none tracking-tight">
                 <span className="tabular-nums">
                   {s.value.toFixed(s.decimals)}
                   <span className="text-iris">{s.suffix}</span>

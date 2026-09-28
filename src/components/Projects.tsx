@@ -21,7 +21,7 @@ type SceneProps = {
   description: string;
   visualLabel: string;
   flip?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 function Scene({
@@ -459,7 +459,7 @@ function TaskProVisual() {
           <span className="text-[9px] tracking-[0.25em] text-muted-foreground">TASK #142</span>
           <AnimatePresence mode="wait">
             <motion.span
-              key={STAGES[active].name}
+              key={STAGES[active]?.name ?? ""}
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
@@ -471,21 +471,21 @@ function TaskProVisual() {
                   : "border-iris text-iris",
               )}
             >
-              {STAGES[active].name}
+              {STAGES[active]?.name}
             </motion.span>
           </AnimatePresence>
         </div>
         <div className="mt-3 h-6">
           <AnimatePresence mode="wait">
             <motion.div
-              key={STAGES[active].note}
+              key={STAGES[active]?.note ?? ""}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
               className="text-sm font-light text-foreground/80"
             >
-              {STAGES[active].note}
+              {STAGES[active]?.note}
             </motion.div>
           </AnimatePresence>
         </div>

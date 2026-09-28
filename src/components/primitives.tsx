@@ -24,7 +24,7 @@ export function Reveal({
   y = 32,
 }: {
   children: ReactNode;
-  className?: string;
+  className?: string | undefined;
   delay?: number;
   y?: number;
 }) {
@@ -98,7 +98,7 @@ export function Magnetic({
   strength = 0.25,
 }: {
   children: ReactNode;
-  className?: string;
+  className?: string | undefined;
   strength?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);

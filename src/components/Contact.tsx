@@ -6,9 +6,12 @@ import { EASE, Magnetic, Reveal } from "./primitives";
 const EMAIL = "kopvajpayee777@gmail.com";
 
 const SOCIALS = [
-  { label: "LINKEDIN", href: "#" },
-  { label: "GITHUB", href: "#" },
-  { label: "RESUME", href: "#" },
+  { label: "LINKEDIN", href: "https://www.linkedin.com/in/kopal-vajpayee" },
+  { label: "GITHUB", href: "https://github.com/kopal-vajp" },
+  {
+    label: "RESUME",
+    href: "https://drive.google.com/file/d/1o3A6mcDTg8ISi1HKKalgxRtD5aSnpIEJ/view?usp=sharing",
+  },
 ];
 
 export function Contact() {
@@ -70,7 +73,9 @@ export function Contact() {
                 <Magnetic key={s.label} strength={0.35}>
                   <a
                     href={s.href}
-                    className="group inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-[11px] tracking-[0.25em] text-foreground transition-colors hover:border-iris"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="group inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-[11px] tracking-[0.25em] text-foreground transition-colors hover:border-amber"
                   >
                     {s.label}
                     <ArrowUpRight

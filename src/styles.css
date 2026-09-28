@@ -27,6 +27,7 @@
   --color-surface-2: var(--surface-2);
   --color-iris: var(--iris);
   --color-glow: var(--glow);
+  --color-amber: var(--amber);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-primary: var(--primary);
@@ -51,6 +52,7 @@
   --surface-2: oklch(0.225 0.016 285);
   --iris: oklch(0.62 0.22 292);
   --glow: oklch(0.82 0.105 200);
+  --amber: oklch(0.74 0.15 62);
   --muted: oklch(0.2 0.012 285);
   --muted-foreground: oklch(0.62 0.014 285);
   --primary: oklch(0.93 0.012 85);

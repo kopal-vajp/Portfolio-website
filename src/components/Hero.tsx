@@ -1,4 +1,4 @@
-import { useRef, type MouseEvent as ReactMouseEvent, type ReactNode } from "react";
+import { useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode } from "react";
 import {
   motion,
   useMotionValue,
@@ -9,6 +9,8 @@ import {
 } from "framer-motion";
 import portrait from "@/assets/kopal-portrait.jpg";
 import { EASE, Magnetic } from "./primitives";
+import { ResumeModal } from "./ResumeModal";
+
 
 function MaskedLine({ children, delay }: { children: ReactNode; delay: number }) {
   return (

@@ -46,28 +46,32 @@
 
 :root {
   --radius: 0.25rem;
-  --background: oklch(0.145 0.012 285);
-  --foreground: oklch(0.93 0.012 85);
-  --surface: oklch(0.185 0.014 285);
-  --surface-2: oklch(0.225 0.016 285);
-  --iris: oklch(0.62 0.22 292);
-  --glow: oklch(0.82 0.105 200);
-  --amber: oklch(0.74 0.15 62);
-  --muted: oklch(0.2 0.012 285);
-  --muted-foreground: oklch(0.62 0.014 285);
-  --primary: oklch(0.93 0.012 85);
-  --primary-foreground: oklch(0.16 0.012 285);
-  --secondary: oklch(0.22 0.014 285);
-  --secondary-foreground: oklch(0.93 0.012 85);
-  --accent: oklch(0.24 0.02 292);
-  --accent-foreground: oklch(0.93 0.012 85);
+  /* Deep obsidian onyx base, emerald + champagne accents */
+  --background: oklch(0.12 0.01 160);
+  --foreground: oklch(0.94 0.012 90);
+  --surface: oklch(0.163 0.014 162);
+  --surface-2: oklch(0.205 0.018 163);
+  --emerald: oklch(0.68 0.16 165);
+  --champagne: oklch(0.84 0.12 85);
+  --iris: var(--emerald);
+  --glow: var(--champagne);
+  --amber: oklch(0.8 0.13 78);
+  --muted: oklch(0.18 0.012 162);
+  --muted-foreground: oklch(0.64 0.016 162);
+  --primary: oklch(0.94 0.012 90);
+  --primary-foreground: oklch(0.13 0.012 162);
+  --secondary: oklch(0.2 0.016 162);
+  --secondary-foreground: oklch(0.94 0.012 90);
+  --accent: oklch(0.24 0.04 165);
+  --accent-foreground: oklch(0.94 0.012 90);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.93 0.012 85 / 12%);
-  --input: oklch(0.93 0.012 85 / 16%);
-  --ring: oklch(0.62 0.22 292);
-  --line: oklch(0.93 0.012 85 / 10%);
+  --border: oklch(0.94 0.012 90 / 12%);
+  --input: oklch(0.94 0.012 90 / 16%);
+  --ring: var(--emerald);
+  --line: oklch(0.94 0.012 90 / 10%);
 }
+
 
 @layer base {
   * {
@@ -125,8 +129,25 @@
   }
 }
 
+/* Skill graph connection curves */
+@keyframes draw-edge {
+  from {
+    stroke-dashoffset: 400;
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+.skill-edge {
+  stroke-dasharray: 400;
+  animation: draw-edge 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
 /* Horizontal credential strip */
 @keyframes marquee {
+
   to {
     transform: translateX(-50%);
   }

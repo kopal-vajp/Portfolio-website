@@ -1,4 +1,4 @@
-import { useRef, type MouseEvent as ReactMouseEvent, type ReactNode } from "react";
+import { useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode } from "react";
 import {
   motion,
   useMotionValue,
@@ -9,6 +9,8 @@ import {
 } from "framer-motion";
 import portrait from "@/assets/kopal-portrait.jpg";
 import { EASE, Magnetic } from "./primitives";
+import { ResumeModal } from "./ResumeModal";
+
 
 function MaskedLine({ children, delay }: { children: ReactNode; delay: number }) {
   return (
@@ -29,6 +31,8 @@ export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+  const [resumeOpen, setResumeOpen] = useState(false);
+
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -122,6 +126,15 @@ export function Hero() {
               </a>
             </Magnetic>
             <Magnetic>
+              <button
+                type="button"
+                onClick={() => setResumeOpen(true)}
+                className="inline-flex items-center gap-3 border border-iris/60 bg-iris/10 px-7 py-3.5 text-[11px] font-semibold tracking-[0.25em] text-iris backdrop-blur-sm transition-colors hover:bg-iris hover:text-primary-foreground"
+              >
+                VIEW RESUME <span aria-hidden>↗</span>
+              </button>
+            </Magnetic>
+            <Magnetic>
               <a
                 href="#contact"
                 className="group inline-flex items-center gap-3 border-b border-line pb-1 text-[11px] tracking-[0.25em] text-muted-foreground transition-colors hover:border-iris hover:text-foreground"
@@ -132,6 +145,7 @@ export function Hero() {
                 </span>
               </a>
             </Magnetic>
+
           </motion.div>
         </motion.div>
 
@@ -189,6 +203,9 @@ export function Hero() {
           />
         </div>
       </motion.div>
+
+      <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
     </section>
+
   );
 }

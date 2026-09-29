@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { BackgroundCanvas } from "@/components/BackgroundCanvas";
 import { Cursor } from "@/components/Cursor";
+
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
@@ -37,9 +39,11 @@ export const Route = createFileRoute("/")({
 function Portfolio() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
+      <BackgroundCanvas />
       <Cursor />
       <Nav />
-      <main>
+      <main className="relative z-10">
+
         <Hero />
         <About />
         <Skills />

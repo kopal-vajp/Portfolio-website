@@ -4,15 +4,10 @@ const FACTS = [
   { label: "DEGREE", value: "B.E. Computer Science & Engineering" },
   { label: "INSTITUTION", value: "NMIT, Bengaluru" },
   { label: "YEARS", value: "2023 — 2027" },
+  { label: "CGPA", value: "9.73 / 10.0" },
   { label: "BASED IN", value: "Bengaluru, India" },
 ];
 
-const STATS = [
-  { value: 9.73, decimals: 2, suffix: "", label: "CGPA" },
-  { value: 480, decimals: 0, suffix: "K+", label: "RECORDS PROCESSED" },
-  { value: 0.99, decimals: 2, suffix: "", label: "MAXIMUM R²" },
-  { value: 200, decimals: 0, suffix: "+", label: "HACKATHON TEAMS" },
-];
 
 export function About() {
   return (

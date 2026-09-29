@@ -52,27 +52,6 @@ export function About() {
             </Reveal>
           </div>
         </div>
-
-        {/* Editorial stats — large type, staggered baseline, no cards */}
-        <div className="mt-28 grid grid-cols-2 gap-y-16 lg:grid-cols-4 lg:gap-x-8">
-          {STATS.map((s, i) => (
-            <Reveal
-              key={s.label}
-              delay={0.08 * i}
-              className={i % 2 === 1 ? "lg:mt-14" : undefined}
-            >
-              <div className="font-display text-[clamp(2.2rem,4.6vw,3.9rem)] font-extrabold leading-none tracking-tight">
-                <span className="tabular-nums">
-                  {s.value.toFixed(s.decimals)}
-                  <span className="text-iris">{s.suffix}</span>
-                </span>
-              </div>
-              <div className="mt-3 text-[10px] tracking-[0.3em] text-muted-foreground">
-                {s.label}
-              </div>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   );

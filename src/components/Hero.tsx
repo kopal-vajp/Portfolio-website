@@ -31,6 +31,8 @@ export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+  const [resumeOpen, setResumeOpen] = useState(false);
+
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -201,6 +203,9 @@ export function Hero() {
           />
         </div>
       </motion.div>
+
+      <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
     </section>
+
   );
 }

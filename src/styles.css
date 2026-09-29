@@ -129,8 +129,25 @@
   }
 }
 
+/* Skill graph connection curves */
+@keyframes draw-edge {
+  from {
+    stroke-dashoffset: 400;
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+.skill-edge {
+  stroke-dasharray: 400;
+  animation: draw-edge 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
 /* Horizontal credential strip */
 @keyframes marquee {
+
   to {
     transform: translateX(-50%);
   }

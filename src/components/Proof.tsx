@@ -32,7 +32,7 @@ export function Proof() {
             {ACHIEVEMENTS.map((a, i) => (
               <Reveal key={a.title} delay={0.06 * i}>
                 <div className="group flex items-center gap-6 border border-line bg-surface/50 p-5 transition-colors hover:border-iris/60">
-                  <div className="w-16 shrink-0 font-display text-2xl font-extrabold text-iris">
+                  <div className="w-20 shrink-0 font-display text-xl font-extrabold text-iris">
                     {a.place}
                   </div>
                   <div>

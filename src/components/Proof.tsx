@@ -1,80 +1,98 @@
-import { Kicker, Reveal } from "./primitives";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { EASE, Kicker, Reveal } from "./primitives";
 
 const ACHIEVEMENTS = [
-  {
-    place: "4TH",
-    title: "GDG CODESPRINT 4.0",
-    detail: "4th place among 200+ teams",
-  },
-  {
-    place: "★",
-    title: "SPARKLAB DESIGNATHON",
-    detail: "Special Recognition",
-  },
-  {
-    place: "+20%",
-    title: "NMIT HACKS",
-    detail: "Design Team Lead — improved participation by 20%",
-  },
+  { place: "4TH", title: "GDG CODESPRINT 4.0", detail: "4th place among 200+ teams" },
+  { place: "★", title: "SPARKLAB DESIGNATHON", detail: "Special Recognition" },
+  { place: "+20%", title: "NMIT HACKS", detail: "Design Team Lead — improved participation by 20%" },
 ];
 
 const CERTS = [
-  "Full Stack Java Developer — Simplilearn",
-  "Launchpad Enterprise Applications — PwC",
-  "Operating Systems Basics — Cisco Networking Academy",
-  "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
-  "Artificial Intelligence: Concepts and Techniques — IISc Bangalore",
+  { issuer: "SIMPLILEARN", name: "Full Stack Java Developer" },
+  { issuer: "PwC", name: "Launchpad Enterprise Applications" },
+  { issuer: "CISCO", name: "Operating Systems Basics — Cisco Networking Academy" },
+  { issuer: "ORACLE", name: "OCI 2025 Certified AI Foundations Associate" },
+  { issuer: "IISc", name: "Artificial Intelligence: Concepts and Techniques — IISc Bangalore" },
 ];
 
 export function Proof() {
+  const [active, setActive] = useState(0);
+  const cert = CERTS[active]!;
   return (
-    <section className="relative py-32 md:py-44">
+    <section className="relative py-24 md:py-32">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
         <Kicker index="05" label="PROOF" />
 
-        {/* Editorial achievement rows */}
-        <div className="mt-16">
-          {ACHIEVEMENTS.map((a, i) => (
-            <Reveal key={a.title} delay={0.06 * i}>
-              <div className="group grid gap-1 border-t border-line py-8 transition-colors last:border-b hover:bg-surface/40 md:grid-cols-12 md:items-baseline md:gap-4">
-                <div className="font-display text-sm font-bold text-iris md:col-span-2">
-                  {a.place}
+        <div className="mt-12 grid gap-10 lg:grid-cols-2">
+          {/* Achievements */}
+          <div className="space-y-4">
+            <div className="text-[10px] tracking-[0.3em] text-muted-foreground">ACHIEVEMENTS</div>
+            {ACHIEVEMENTS.map((a, i) => (
+              <Reveal key={a.title} delay={0.06 * i}>
+                <div className="group flex items-center gap-6 border border-line bg-surface/50 p-5 transition-colors hover:border-iris/60">
+                  <div className="w-20 shrink-0 font-display text-xl font-extrabold text-iris">
+                    {a.place}
+                  </div>
+                  <div>
+                    <div className="font-display text-lg font-bold tracking-tight">{a.title}</div>
+                    <div className="mt-1 text-sm text-muted-foreground">{a.detail}</div>
+                  </div>
                 </div>
-                <div className="font-display text-2xl font-bold tracking-tight transition-transform duration-300 group-hover:translate-x-2 md:col-span-5">
-                  {a.title}
-                </div>
-                <div className="text-sm text-muted-foreground md:col-span-5 md:text-right">
-                  {a.detail}
-                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Certifications drawer */}
+          <Reveal delay={0.1}>
+            <div className="text-[10px] tracking-[0.3em] text-muted-foreground">
+              CERTIFICATIONS — {CERTS.length}
+            </div>
+            <div className="mt-4 border border-line bg-surface/50 p-5">
+              <div className="flex flex-wrap gap-2">
+                {CERTS.map((c, i) => (
+                  <button
+                    key={c.issuer}
+                    type="button"
+                    onClick={() => setActive(i)}
+                    onMouseEnter={() => setActive(i)}
+                    className={cn(
+                      "rounded-full border px-3 py-1.5 text-[10px] tracking-[0.2em] transition-colors",
+                      i === active
+                        ? "border-iris bg-iris/15 text-iris"
+                        : "border-line text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    {c.issuer}
+                  </button>
+                ))}
               </div>
-            </Reveal>
-          ))}
+              <div className="relative mt-6 min-h-[120px] border-t border-line pt-6">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={cert.issuer}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.35, ease: EASE }}
+                  >
+                    <div className="text-[10px] tracking-[0.3em] text-glow">✦ {cert.issuer}</div>
+                    <div className="mt-3 font-display text-xl font-bold leading-snug tracking-tight md:text-2xl">
+                      {cert.name}
+                    </div>
+                    <div className="mt-3 text-[10px] tracking-[0.25em] text-muted-foreground">
+                      {String(active + 1).padStart(2, "0")} / {String(CERTS.length).padStart(2, "0")} — VERIFIED CREDENTIAL
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+          </Reveal>
         </div>
 
-        {/* Credential strip */}
-        <Reveal className="mt-24">
-          <div className="text-[10px] tracking-[0.3em] text-muted-foreground">CERTIFICATIONS</div>
-          <div className="relative mt-6 overflow-hidden border-y border-line py-6">
-            <div className="marquee-track gap-0">
-              {[0, 1].map((copy) => (
-                <div key={copy} className="flex shrink-0" aria-hidden={copy === 1}>
-                  {CERTS.map((c) => (
-                    <span
-                      key={`${copy}-${c}`}
-                      className="flex items-center gap-3 whitespace-nowrap px-8 text-sm text-muted-foreground"
-                    >
-                      <span className="text-iris">✦</span>
-                      {c}
-                    </span>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-
         {/* Philosophy */}
-        <Reveal className="mt-32 md:mt-44">
+        <Reveal className="mt-24 md:mt-32">
           <blockquote className="mx-auto max-w-4xl text-center">
             <p className="font-display text-[clamp(1.6rem,3.6vw,3rem)] font-bold leading-[1.15] tracking-tight">
               "I DON'T JUST WANT TO MAKE THINGS WORK. I WANT TO{" "}

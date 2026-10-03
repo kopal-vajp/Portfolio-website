@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll } from "framer-motion";
-import { Kicker, Reveal } from "./primitives";
+import { CardTilt, Kicker, Reveal } from "./primitives";
 
 export function Experience() {
   const ref = useRef<HTMLDivElement>(null);
@@ -23,33 +23,34 @@ export function Experience() {
           />
 
           <Reveal>
-            <div className="text-[10px] tracking-[0.3em] text-iris">MAY 2026 — AUG 2026</div>
-            <h3 className="mt-4 font-display text-3xl font-bold tracking-tight md:text-4xl">
-              ZANSHIN ENGINEERING
-            </h3>
-            <p className="mt-2 text-muted-foreground">
-              Project Intern — AI & Resume Development
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.12}>
-            <ul className="mt-10 max-w-2xl space-y-6">
-              <li className="flex gap-5">
-                <span className="mt-3 h-px w-8 shrink-0 bg-glow/70" />
-                <p className="leading-relaxed text-muted-foreground">
-                  Built a cross-browser extension with a serverless FastAPI proxy for
-                  resume parsing and ATS data ingestion — extension on the front,
-                  clean ingestion pipeline behind it.
+            <CardTilt max={5} className="max-w-3xl">
+              <div className="border border-line bg-surface/60 p-6 backdrop-blur-sm md:p-10">
+                <div className="text-[10px] tracking-[0.3em] text-iris">MAY 2026 — AUG 2026</div>
+                <h3 className="mt-4 font-display text-3xl font-bold tracking-tight md:text-4xl">
+                  ZANSHIN ENGINEERING
+                </h3>
+                <p className="mt-2 text-muted-foreground">
+                  Project Intern — AI & Resume Development
                 </p>
-              </li>
-              <li className="flex gap-5">
-                <span className="mt-3 h-px w-8 shrink-0 bg-glow/70" />
-                <p className="leading-relaxed text-muted-foreground">
-                  Designed AI interview preparation workflows: resume–JD analysis,
-                  automated question generation and candidate evaluation.
-                </p>
-              </li>
-            </ul>
+                <ul className="mt-8 space-y-6">
+                  <li className="flex gap-5">
+                    <span className="mt-3 h-px w-8 shrink-0 bg-glow/70" />
+                    <p className="leading-relaxed text-muted-foreground">
+                      Built a cross-browser extension with a serverless FastAPI proxy for
+                      resume parsing and ATS data ingestion — extension on the front,
+                      clean ingestion pipeline behind it.
+                    </p>
+                  </li>
+                  <li className="flex gap-5">
+                    <span className="mt-3 h-px w-8 shrink-0 bg-glow/70" />
+                    <p className="leading-relaxed text-muted-foreground">
+                      Designed AI interview preparation workflows: resume–JD analysis,
+                      automated question generation and candidate evaluation.
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </CardTilt>
           </Reveal>
 
           <Reveal delay={0.2}>

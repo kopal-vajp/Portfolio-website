@@ -8,7 +8,7 @@ import {
   useTransform,
 } from "framer-motion";
 import portrait from "@/assets/kopal-portrait.jpg";
-import { EASE, Magnetic } from "./primitives";
+import { EASE, Magnetic, TextScramble } from "./primitives";
 import { ResumeModal } from "./ResumeModal";
 
 
@@ -78,7 +78,7 @@ export function Hero() {
           >
             <span className="h-px w-10 bg-iris" />
             <span className="text-[11px] tracking-[0.35em] text-muted-foreground">
-              COMPUTER SCIENCE × AI × SOFTWARE
+              <TextScramble text="SOFTWARE ENGINEER & AI SYSTEMS DEVELOPER" />
             </span>
           </motion.div>
 
@@ -176,14 +176,8 @@ export function Hero() {
               <div className="absolute bottom-4 left-4 text-[10px] tracking-[0.3em] text-foreground/70">
                 KOPAL VAJPAYEE — BENGALURU, IN
               </div>
-              <div className="absolute right-4 top-4 border border-amber/40 bg-background/40 px-2 py-1 text-[9px] tracking-[0.25em] text-amber backdrop-blur-sm">
-                EST. 2023 — 2027
-              </div>
             </div>
           </motion.div>
-          <div className="pointer-events-none absolute -left-3 top-0 hidden origin-top-left rotate-90 text-[10px] tracking-[0.4em] text-muted-foreground lg:block">
-            PORTFOLIO — 2026
-          </div>
         </motion.div>
       </div>
 

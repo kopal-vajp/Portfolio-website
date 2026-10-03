@@ -51,14 +51,15 @@ function Scene({
           "lg:sticky lg:top-24",
         )}
       >
-        <motion.div
-          style={{ y: visualY }}
-          className="relative aspect-[4/3] w-full overflow-hidden border border-line bg-surface"
-        >
-          <div className="absolute left-4 top-4 z-10 text-[9px] tracking-[0.3em] text-muted-foreground">
-            {visualLabel}
-          </div>
-          {children}
+        <motion.div style={{ y: visualY }}>
+          <CardTilt>
+            <div className="relative aspect-[4/3] w-full overflow-hidden border border-line bg-surface">
+              <div className="absolute left-4 top-4 z-10 text-[9px] tracking-[0.3em] text-muted-foreground">
+                {visualLabel}
+              </div>
+              {children}
+            </div>
+          </CardTilt>
         </motion.div>
       </div>
 

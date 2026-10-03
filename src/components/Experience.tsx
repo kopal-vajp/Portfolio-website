@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll } from "framer-motion";
-import { Kicker, Reveal } from "./primitives";
+import { CardTilt, Kicker, Reveal } from "./primitives";
 
 export function Experience() {
   const ref = useRef<HTMLDivElement>(null);

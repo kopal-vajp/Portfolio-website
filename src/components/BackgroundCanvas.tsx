@@ -137,7 +137,7 @@ export function BackgroundCanvas() {
     <canvas
       ref={ref}
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-0 opacity-70"
+      className="pointer-events-none fixed inset-0 z-0 opacity-70 [.light_&]:opacity-40"
     />
   );
 }

@@ -9,7 +9,7 @@ import {
 } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { EASE, Kicker, Reveal } from "./primitives";
+import { CardTilt, EASE, Kicker, Reveal } from "./primitives";
 
 /* ---------------- Scene shell ---------------- */
 

@@ -78,7 +78,7 @@ export function Hero() {
           >
             <span className="h-px w-10 bg-iris" />
             <span className="text-[11px] tracking-[0.35em] text-muted-foreground">
-              <TextScramble text="SOFTWARE ENGINEER & AI SYSTEMS DEVELOPER" />
+              <TextScramble text="" />
             </span>
           </motion.div>
 

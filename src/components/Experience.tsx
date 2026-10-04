@@ -27,10 +27,10 @@ export function Experience() {
               <div className="border border-line bg-surface/60 p-6 backdrop-blur-sm md:p-10">
                 <div className="text-[10px] tracking-[0.3em] text-iris">MAY 2026 — AUG 2026</div>
                 <h3 className="mt-4 font-display text-3xl font-bold tracking-tight md:text-4xl">
-                  ZANSHIN ENGINEERING
+                  ZANSHIN SYSTEMS
                 </h3>
                 <p className="mt-2 text-muted-foreground">
-                  Project Intern — AI & Resume Development
+                  AI & Product Development Intern
                 </p>
                 <ul className="mt-8 space-y-6">
                   <li className="flex gap-5">

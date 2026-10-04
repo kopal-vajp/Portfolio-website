@@ -168,11 +168,10 @@ export function Hero() {
                   alt="Portrait of Kopal Vajpayee"
                   width={1024}
                   height={1280}
-                  className="h-full w-full object-cover object-top"
+                  className="h-full w-full object-cover object-[50%_15%]"
                 />
               </motion.div>
-              <div className="absolute inset-0 bg-amber/10 mix-blend-soft-light" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 text-[10px] tracking-[0.3em] text-foreground/70">
                 KOPAL VAJPAYEE — BENGALURU, IN
               </div>

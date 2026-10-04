@@ -1,4 +1,4 @@
-﻿import { useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode } from "react";
+import { useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode } from "react";
 import {
   motion,
   useMotionValue,
@@ -67,7 +67,7 @@ export function Hero() {
       </div>
 
       <div className="relative mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-12 px-6 pb-20 md:px-10 lg:grid-cols-12 lg:gap-16 lg:pb-28">
-        {/* Left ΓÇö type */}
+        {/* Left — type */}
         <motion.div style={{ y: titleY }} className="order-2 lg:order-1 lg:col-span-7">
           <h1 className="font-display text-[clamp(2.6rem,6.5vw,5.4rem)] font-extrabold leading-[0.98] tracking-[-0.02em]">
             <MaskedLine delay={0.15}>KOPAL</MaskedLine>
@@ -109,7 +109,7 @@ export function Hero() {
                 href="#work"
                 className="inline-flex items-center gap-3 bg-primary px-7 py-3.5 text-[11px] font-semibold tracking-[0.25em] text-primary-foreground transition-all duration-300 hover:bg-iris hover:shadow-[0_0_25px_-5px_var(--emerald)]"
               >
-                VIEW WORK <span aria-hidden>Γåô</span>
+                VIEW WORK <span aria-hidden>↓</span>
               </a>
             </Magnetic>
             <Magnetic>
@@ -118,7 +118,7 @@ export function Hero() {
                 onClick={() => setResumeOpen(true)}
                 className="inline-flex items-center gap-3 border border-iris/60 bg-iris/10 px-7 py-3.5 text-[11px] font-semibold tracking-[0.25em] text-iris backdrop-blur-sm transition-colors hover:bg-iris hover:text-primary-foreground"
               >
-                VIEW RESUME <span aria-hidden>Γåù</span>
+                VIEW RESUME <span aria-hidden>↗</span>
               </button>
             </Magnetic>
             <Magnetic>
@@ -128,14 +128,14 @@ export function Hero() {
               >
                 GET IN TOUCH{" "}
                 <span aria-hidden className="transition-transform group-hover:translate-x-1">
-                  ΓåÆ
+                  →
                 </span>
               </a>
             </Magnetic>
           </motion.div>
         </motion.div>
 
-        {/* Right ΓÇö portrait panel */}
+        {/* Right — portrait panel */}
         <motion.div style={{ y: portraitY }} className="relative order-1 lg:order-2 lg:col-span-5">
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
@@ -180,11 +180,11 @@ export function Hero() {
           <div className="marquee-track flex gap-12 text-[10px] tracking-[0.3em] text-muted-foreground">
             {Array.from({ length: 2 }).map((_, idx) => (
               <div key={idx} className="flex gap-12">
-                <span>Γ£ª AMAZON ML SUMMER SCHOOL 2025</span>
-                <span>Γ£ª 9.73 CGPA AT NMIT BENGALURU</span>
-                <span>Γ£ª ZANSHIN & SKILLCRAFT INTERN</span>
-                <span>Γ£ª 480K+ DATA RECORDS PROCESSED</span>
-                <span>Γ£ª 4 END-TO-END SYSTEMS SHIPPED</span>
+                <span>✦ AMAZON ML SUMMER SCHOOL 2025</span>
+                <span>✦ 9.73 CGPA AT NMIT BENGALURU</span>
+                <span>✦ ZANSHIN & SKILLCRAFT INTERN</span>
+                <span>✦ 480K+ DATA RECORDS PROCESSED</span>
+                <span>✦ 4 END-TO-END SYSTEMS SHIPPED</span>
               </div>
             ))}
           </div>

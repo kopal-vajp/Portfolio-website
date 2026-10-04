@@ -4,6 +4,12 @@ import { cn } from "@/lib/utils";
 import { EASE, Kicker, Reveal } from "./primitives";
 
 const ACHIEVEMENTS = [
+  {
+    place: "TOP",
+    sub: "5%",
+    title: "AMAZON ML SUMMER SCHOOL 2025",
+    detail: "Selected for Amazon ML Summer School out of 60,000+ applicants",
+  },
   { place: "4TH", title: "GDG CODESPRINT 4.0", detail: "4th place among 200+ teams" },
   { place: "★", title: "SPARKLAB DESIGNATHON", detail: "Special Recognition" },
   { place: "+20%", title: "NMIT HACKS", detail: "Design Team Lead — improved participation by 20%" },
@@ -15,13 +21,15 @@ const CERTS = [
   { issuer: "CISCO", name: "Operating Systems Basics — Cisco Networking Academy" },
   { issuer: "ORACLE", name: "OCI 2025 Certified AI Foundations Associate" },
   { issuer: "IISc", name: "Artificial Intelligence: Concepts and Techniques — IISc Bangalore" },
+  { issuer: "INFOSYS", name: "Programming using Java — Infosys Springboard" },
+  { issuer: "SNOWFLAKE", name: "SnowPro Associate: Platform Certified" },
 ];
 
 export function Proof() {
   const [active, setActive] = useState(0);
   const cert = CERTS[active]!;
   return (
-    <section className="relative py-24 md:py-32">
+    <section className="relative py-28 md:py-36">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
         <Kicker index="05" label="PROOF" />
 
@@ -32,8 +40,21 @@ export function Proof() {
             {ACHIEVEMENTS.map((a, i) => (
               <Reveal key={a.title} delay={0.06 * i}>
                 <div className="group flex items-center gap-6 border border-line bg-surface/50 p-5 transition-colors hover:border-iris/60">
-                  <div className="w-20 shrink-0 font-display text-xl font-extrabold text-iris">
-                    {a.place}
+                  <div className="flex w-16 shrink-0 flex-col justify-center font-display">
+                    {a.sub ? (
+                      <>
+                        <span className="text-[10px] font-bold tracking-[0.2em] text-iris/80 leading-tight">
+                          {a.place}
+                        </span>
+                        <span className="text-xl font-extrabold text-iris leading-tight">
+                          {a.sub}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="text-xl font-extrabold text-iris">
+                        {a.place}
+                      </span>
+                    )}
                   </div>
                   <div>
                     <div className="font-display text-lg font-bold tracking-tight">{a.title}</div>

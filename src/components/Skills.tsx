@@ -5,13 +5,13 @@ import { Kicker, Reveal } from "./primitives";
 const GROUPS = [
   {
     name: "BUILD",
-    tag: "LANGUAGES",
-    techs: ["Java", "Python", "C++", "JavaScript", "SQL"],
+    tag: "LANGUAGES & WEB",
+    techs: ["Java", "Python", "C++", "JavaScript", "HTML", "CSS", "SQL"],
   },
   {
     name: "SHIP",
-    tag: "PRODUCT",
-    techs: ["React", "Next.js", "REST APIs", "MySQL"],
+    tag: "PRODUCT & FRONTEND",
+    techs: ["React", "Next.js", "REST APIs", "UI/UX Design", "MySQL"],
   },
   {
     name: "THINK",
@@ -46,12 +46,20 @@ const RELATED: Record<string, string[]> = {
     "LLM Integration",
   ],
   "C++": ["DSA", "OOP"],
-  JavaScript: ["React", "Next.js", "REST APIs"],
+  JavaScript: ["React", "Next.js", "HTML", "CSS", "REST APIs", "VS Code"],
+  HTML: ["CSS", "JavaScript", "React", "UI/UX Design"],
+  CSS: ["HTML", "JavaScript", "React", "UI/UX Design", "Figma"],
   SQL: ["MySQL", "DBMS"],
-  React: ["Next.js", "REST APIs", "JavaScript"],
-  "Next.js": ["React", "REST APIs", "JavaScript"],
+  React: ["Next.js", "JavaScript", "HTML", "CSS", "REST APIs", "UI/UX Design"],
+  "Next.js": ["React", "JavaScript", "REST APIs", "VS Code"],
   "REST APIs": ["React", "Next.js", "JavaScript", "Python", "Computer Networks"],
+  "UI/UX Design": ["Figma", "Canva", "HTML", "CSS", "React"],
   MySQL: ["SQL", "DBMS"],
+  Git: ["GitHub", "VS Code"],
+  GitHub: ["Git", "VS Code", "Next.js"],
+  "VS Code": ["Git", "GitHub", "JavaScript", "Python"],
+  Figma: ["UI/UX Design", "Canva", "CSS"],
+  Canva: ["UI/UX Design", "Figma"],
   "Scikit-learn": ["Python", "Pandas", "NumPy", "Regression", "Classification"],
   Pandas: ["Python", "NumPy", "Scikit-learn", "Feature Engineering"],
   NumPy: ["Python", "Pandas", "Scikit-learn"],
@@ -116,7 +124,7 @@ export function Skills() {
   const activeCount = hover ? (RELATED[hover]?.length ?? 0) : 0;
 
   return (
-    <section className="relative py-32 md:py-44">
+    <section className="relative py-28 md:py-36">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
         <Kicker index="02" label="CAPABILITIES" />
 

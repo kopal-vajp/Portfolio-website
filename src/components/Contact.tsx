@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { EASE, Magnetic, Reveal } from "./primitives";
+import { EASE, Kicker, Magnetic, Reveal } from "./primitives";
 
 const EMAIL = "kopvajpayee777@gmail.com";
 
@@ -28,23 +28,20 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="relative flex min-h-[92vh] flex-col justify-center py-32">
+    <section id="contact" className="relative py-28 md:py-36">
       <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
-        <div className="text-center">
-          <Reveal>
-            <div className="text-[10px] tracking-[0.35em] text-muted-foreground">
-              06 — CONTACT
-            </div>
-          </Reveal>
+        <Kicker index="06" label="CONTACT" />
+
+        <div className="mt-12 text-center">
           <Reveal delay={0.08}>
-            <h2 className="mt-10 font-display text-[clamp(2.2rem,6.5vw,5.5rem)] font-extrabold leading-[1.02] tracking-tight">
+            <h2 className="font-display text-[clamp(2.4rem,6.5vw,5.5rem)] font-extrabold leading-[1.02] tracking-tight text-foreground">
               HAVE SOMETHING
               <br />
               WORTH BUILDING?
             </h2>
           </Reveal>
           <Reveal delay={0.16}>
-            <p className="mt-4 font-editorial text-[clamp(1.8rem,5vw,4.2rem)] italic leading-tight text-iris">
+            <p className="mt-6 font-editorial text-[clamp(2rem,5.5vw,4.5rem)] font-normal italic leading-tight text-iris">
               Let's make it real.
             </p>
           </Reveal>
@@ -75,7 +72,7 @@ export function Contact() {
                     href={s.href}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="group inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-[11px] tracking-[0.25em] text-foreground transition-colors hover:border-amber"
+                    className="group inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-[11px] tracking-[0.25em] text-foreground transition-colors hover:border-iris hover:shadow-[0_0_20px_-5px_var(--emerald)]"
                   >
                     {s.label}
                     <ArrowUpRight

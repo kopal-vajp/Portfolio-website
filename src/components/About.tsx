@@ -11,7 +11,7 @@ const FACTS = [
 
 export function About() {
   return (
-    <section id="about" className="relative py-32 md:py-44">
+    <section id="about" className="relative py-28 md:py-36">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
         <Kicker index="01" label="ABOUT" />
 

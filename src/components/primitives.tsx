@@ -33,7 +33,7 @@ export function Reveal({
     <motion.div
       initial={{ opacity: 0, y: reduce ? 0 : y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: false, margin: "-30px" }}
       transition={{ duration: 0.8, delay, ease: EASE }}
       className={className}
     >
@@ -141,7 +141,7 @@ export function CardTilt({
           style={{
             opacity: glare ? 1 : 0,
             background: glare
-              ? `radial-gradient(circle at ${glare.x}% ${glare.y}%, color-mix(in oklch, var(--glow) 18%, transparent), transparent 55%)`
+              ? `radial-gradient(circle at ${glare.x}% ${glare.y}%, color-mix(in oklch, var(--iris) 10%, transparent), transparent 60%)`
               : undefined,
           }}
         />

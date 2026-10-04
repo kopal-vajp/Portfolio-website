@@ -20,6 +20,8 @@ type SceneProps = {
   stack: string[];
   description: string;
   visualLabel: string;
+  codeUrl: string;
+  liveUrl?: string;
   flip?: boolean;
   children?: React.ReactNode;
 };
@@ -31,6 +33,8 @@ function Scene({
   stack,
   description,
   visualLabel,
+  codeUrl,
+  liveUrl,
   flip,
   children,
 }: SceneProps) {
@@ -98,18 +102,24 @@ function Scene({
         </Reveal>
         <Reveal delay={0.28}>
           <div className="mt-10 flex flex-wrap gap-8">
+            {liveUrl && (
+              <a
+                href={liveUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="group inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.25em] text-foreground transition-colors hover:text-iris"
+              >
+                VIEW PROJECT
+                <ArrowUpRight
+                  size={14}
+                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </a>
+            )}
             <a
-              href="#"
-              className="group inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.25em] text-foreground transition-colors hover:text-iris"
-            >
-              VIEW PROJECT
-              <ArrowUpRight
-                size={14}
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </a>
-            <a
-              href="#"
+              href={codeUrl}
+              target="_blank"
+              rel="noreferrer noopener"
               className="group inline-flex items-center gap-2 text-[11px] tracking-[0.25em] text-muted-foreground transition-colors hover:text-foreground"
             >
               SOURCE CODE
@@ -131,27 +141,47 @@ function PathPilotVisual() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const reduce = useReducedMotion();
-  const shown = inView && !reduce;
+  const [score, setScore] = useState(92);
+  const [scanning, setScanning] = useState(false);
+
+  function triggerScan() {
+    if (scanning) return;
+    setScanning(true);
+    let step = 0;
+    const interval = setInterval(() => {
+      step++;
+      setScore(Math.floor(Math.random() * 8) + 91);
+      if (step > 4) {
+        clearInterval(interval);
+        setScanning(false);
+      }
+    }, 250);
+  }
+
   const bars = [
-    { label: "SKILL MATCH", v: 86 },
-    { label: "KEYWORD DENSITY", v: 74 },
-    { label: "FORMATTING", v: 95 },
+    { label: "SKILL MATCH", v: Math.min(100, score - 6) },
+    { label: "KEYWORD DENSITY", v: Math.min(100, score - 14) },
+    { label: "FORMATTING", v: Math.min(100, score + 3) },
   ];
 
   return (
-    <div ref={ref} className="flex h-full flex-col justify-center gap-7 p-8 pt-12 md:p-10 md:pt-14">
+    <div ref={ref} className="flex h-full flex-col justify-center gap-6 p-6 pt-10 md:p-8 md:pt-12">
       <div className="flex items-center justify-between">
         <span className="text-[10px] tracking-[0.25em] text-muted-foreground">
-          RESUME.PDF — ANALYSIS
+          RESUME.PDF — AI SCANNER
         </span>
-        <span className="flex items-center gap-2 text-[10px] tracking-[0.2em] text-glow">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-glow" />
-          LIVE
-        </span>
+        <button
+          type="button"
+          onClick={triggerScan}
+          disabled={scanning}
+          className="rounded-full border border-iris/50 bg-iris/10 px-3 py-1 text-[9px] tracking-[0.2em] text-iris transition-all hover:bg-iris hover:text-primary-foreground disabled:opacity-50"
+        >
+          {scanning ? "ANALYZING..." : "RE-SCAN RESUME ⚡"}
+        </button>
       </div>
 
       <div className="flex items-center gap-6">
-        <div className="relative h-24 w-24">
+        <div className="relative h-20 w-20">
           <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">
             <circle cx="50" cy="50" r="42" fill="none" stroke="var(--line)" strokeWidth="4" />
             <motion.circle
@@ -163,46 +193,44 @@ function PathPilotVisual() {
               strokeWidth="4"
               strokeLinecap="round"
               strokeDasharray={2 * Math.PI * 42}
-              initial={{ strokeDashoffset: 2 * Math.PI * 42 }}
-              animate={shown ? { strokeDashoffset: 2 * Math.PI * 42 * (1 - 0.92) } : {}}
-              transition={{ duration: 1.4, ease: EASE, delay: 0.2 }}
+              animate={{ strokeDashoffset: 2 * Math.PI * 42 * (1 - score / 100) }}
+              transition={{ duration: 0.8, ease: EASE }}
             />
           </svg>
-          <div className="absolute inset-0 flex items-center justify-center font-display text-xl font-extrabold">
-            92
+          <div className="absolute inset-0 flex items-center justify-center font-display text-xl font-extrabold text-foreground">
+            {score}
           </div>
         </div>
         <div>
           <div className="text-[10px] tracking-[0.25em] text-muted-foreground">ATS SCORE</div>
-          <div className="mt-1 font-display text-sm font-semibold text-glow">
-            +24 vs ORIGINAL
+          <div className="mt-1 font-display text-xs font-semibold text-glow">
+            {scanning ? "SCANNING ENGINE..." : "+24 vs ORIGINAL RESUME"}
           </div>
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3">
         {bars.map((b, i) => (
           <div key={b.label}>
             <div className="flex justify-between text-[9px] tracking-[0.2em] text-muted-foreground">
               <span>{b.label}</span>
               <span>{b.v}%</span>
             </div>
-            <div className="mt-1.5 h-px bg-line">
+            <div className="mt-1 h-px bg-line">
               <motion.div
                 className="h-px bg-iris"
-                initial={{ width: 0 }}
-                animate={shown ? { width: `${b.v}%` } : {}}
-                transition={{ duration: 1.1, ease: EASE, delay: 0.4 + 0.15 * i }}
+                animate={{ width: `${b.v}%` }}
+                transition={{ duration: 0.6, ease: EASE }}
               />
             </div>
           </div>
         ))}
       </div>
 
-      <div className="space-y-2 border-t border-line pt-4">
+      <div className="space-y-2 border-t border-line pt-3">
         {["Keywords matched 34/40", "Quantified impact detected", "All sections present"].map(
           (row) => (
-            <div key={row} className="flex items-center gap-2.5 text-[11px] text-muted-foreground">
+            <div key={row} className="flex items-center gap-2 text-[10px] text-muted-foreground">
               <Check size={12} className="text-glow" />
               {row}
             </div>
@@ -216,98 +244,73 @@ function PathPilotVisual() {
 /* ---------------- 02 — MessageMind (routing) ---------------- */
 
 const CHANNELS = [
-  { name: "SMS", conf: 96 },
-  { name: "EMAIL", conf: 91 },
-  { name: "WHATSAPP", conf: 88 },
+  { name: "SMS", conf: 96, payload: "Your verification code is 4417 — expires in 10 mins." },
+  { name: "EMAIL", conf: 91, payload: "Weekly digest: 4 security alerts resolved automatically." },
+  { name: "WHATSAPP", conf: 88, payload: "Flight BLR->DEL schedule confirmed for 08:30 AM." },
 ];
 
 function MessageMindVisual() {
   const reduce = useReducedMotion();
-  const [active, setActive] = useState(1);
-
-  useEffect(() => {
-    if (reduce) return;
-    const id = setInterval(() => setActive((a) => (a + 1) % CHANNELS.length), 2400);
-    return () => clearInterval(id);
-  }, [reduce]);
+  const [active, setActive] = useState(0);
 
   return (
-    <div className="flex h-full flex-col justify-center gap-6 p-8 pt-12 md:p-10 md:pt-14">
-      <div className="border border-line p-4">
-        <div className="text-[9px] tracking-[0.25em] text-muted-foreground">INBOUND MESSAGE</div>
-        <div className="mt-1.5 text-sm font-light">
-          "Your verification code is 4417 — expires in 10 minutes."
+    <div className="flex h-full flex-col justify-center gap-5 p-6 pt-10 md:p-8 md:pt-12">
+      <div className="border border-line bg-background/40 p-3.5">
+        <div className="flex justify-between text-[9px] tracking-[0.25em] text-muted-foreground">
+          <span>INBOUND MESSAGE PAYLOAD</span>
+          <span className="text-iris">CLICK CHANNEL TO TEST</span>
+        </div>
+        <div className="mt-1.5 min-h-[32px] text-xs font-light text-foreground">
+          "{CHANNELS[active]?.payload}"
         </div>
       </div>
 
       <div className="relative flex flex-col items-center">
-        {reduce ? (
-          <div className="h-8 w-px bg-line" />
-        ) : (
-          <div className="relative h-8 w-px bg-line">
-            <motion.span
-              className="absolute left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-glow"
-              animate={{ y: [-4, 30], opacity: [0, 1, 0] }}
-              transition={{ duration: 1.1, repeat: Infinity, ease: "easeIn" }}
-            />
-          </div>
-        )}
-        <div className="relative flex h-14 w-14 rotate-45 items-center justify-center border border-iris">
-          <div className="h-2 w-2 bg-iris" />
-          {!reduce && (
-            <motion.div
-              className="absolute inset-0 border border-iris"
-              animate={{ scale: [1, 1.7], opacity: [0.6, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
-            />
-          )}
+        <div className="relative h-6 w-px bg-line">
+          <motion.span
+            className="absolute left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-glow"
+            animate={{ y: [-4, 24], opacity: [0, 1, 0] }}
+            transition={{ duration: 1.1, repeat: Infinity, ease: "easeIn" }}
+          />
         </div>
-        <div className="mt-3 text-[9px] tracking-[0.3em] text-iris">INTELLIGENCE CORE</div>
-        <div className="mt-3 h-px w-full bg-line" />
+        <div className="relative flex h-12 w-12 rotate-45 items-center justify-center border border-iris">
+          <div className="h-2 w-2 bg-iris" />
+        </div>
+        <div className="mt-2 text-[9px] tracking-[0.3em] text-iris">AI ROUTING ENGINE</div>
+        <div className="mt-2 h-px w-full bg-line" />
       </div>
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-2">
         {CHANNELS.map((c, i) => {
           const isActive = active === i;
           return (
-            <div
+            <button
               key={c.name}
+              type="button"
+              onClick={() => setActive(i)}
               className={cn(
-                "border p-3 text-center transition-colors duration-500",
-                isActive ? "border-glow" : "border-line",
+                "border p-2.5 text-center transition-all duration-300",
+                isActive ? "border-glow bg-glow/10 shadow-[0_0_15px_-4px_var(--champagne)]" : "border-line hover:border-foreground/30",
               )}
             >
               <div
                 className={cn(
-                  "text-[10px] tracking-[0.2em] transition-colors duration-500",
-                  isActive ? "text-glow" : "text-muted-foreground/40",
+                  "text-[9px] tracking-[0.2em] transition-colors",
+                  isActive ? "text-glow font-bold" : "text-muted-foreground/60",
                 )}
               >
                 {c.name}
               </div>
-              <div className="mt-2 h-4">
-                <AnimatePresence mode="wait">
-                  {isActive && (
-                    <motion.div
-                      key={c.conf}
-                      initial={{ opacity: 0, y: 4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -4 }}
-                      transition={{ duration: 0.3 }}
-                      className="font-display text-xs font-bold text-foreground"
-                    >
-                      {c.conf}%
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+              <div className="mt-1.5 font-display text-xs font-bold text-foreground">
+                {c.conf}% CONF
               </div>
-            </div>
+            </button>
           );
         })}
       </div>
 
       <div className="text-center text-[9px] tracking-[0.25em] text-muted-foreground">
-        RECEPTIVITY PREDICTION → OPTIMAL CHANNEL
+        OPTIMAL DELIVERABILITY → CONFIDENCE SCORE {CHANNELS[active]?.conf}%
       </div>
     </div>
   );
@@ -315,18 +318,47 @@ function MessageMindVisual() {
 
 /* ---------------- 03 — Triplytics (route + prediction) ---------------- */
 
+const ROUTES = [
+  { from: "BLR", to: "DEL", base: 4200, scale: 5600 },
+  { from: "BOM", to: "MAA", base: 3100, scale: 4400 },
+];
+
 function TriplyticsVisual() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: false, margin: "-30px" });
   const reduce = useReducedMotion();
+  const [routeIdx, setRouteIdx] = useState(0);
   const [t, setT] = useState(35);
-  const fare = Math.round(4200 + (t / 100) * 5600);
-  const routePath = "M20,90 C140,10 260,10 380,90";
+
+  const route = ROUTES[routeIdx]!;
+  const fare = Math.round(route.base + (t / 100) * route.scale);
+  const routePath = "M20,75 C140,10 260,10 380,75";
 
   return (
-    <div ref={ref} className="flex h-full flex-col justify-center gap-6 p-8 pt-12 md:p-10 md:pt-14">
+    <div ref={ref} className="flex h-full flex-col justify-center gap-5 p-6 pt-10 md:p-8 md:pt-12">
+      <div className="flex items-center justify-between">
+        <span className="text-[9px] tracking-[0.25em] text-muted-foreground">ROUTE MODEL</span>
+        <div className="flex gap-2">
+          {ROUTES.map((r, i) => (
+            <button
+              key={r.from + r.to}
+              type="button"
+              onClick={() => setRouteIdx(i)}
+              className={cn(
+                "rounded border px-2 py-0.5 text-[9px] tracking-[0.15em] transition-colors",
+                i === routeIdx
+                  ? "border-iris bg-iris/15 text-iris"
+                  : "border-line text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {r.from}→{r.to}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div className="relative">
-        <svg viewBox="0 0 400 120" className="h-28 w-full">
+        <svg viewBox="0 0 400 100" className="h-20 w-full">
           <path
             d={routePath}
             fill="none"
@@ -341,15 +373,15 @@ function TriplyticsVisual() {
             strokeWidth="1.5"
             initial={{ pathLength: 0 }}
             animate={inView && !reduce ? { pathLength: 1 } : {}}
-            transition={{ duration: 2, ease: EASE }}
+            transition={{ duration: 1.8, ease: EASE }}
           />
-          <circle cx="20" cy="90" r="3.5" fill="var(--iris)" />
-          <circle cx="380" cy="90" r="3.5" fill="var(--glow)" />
-          <text x="20" y="112" fill="var(--muted-foreground)" fontSize="9" letterSpacing="2">
-            BLR
+          <circle cx="20" cy="75" r="3.5" fill="var(--iris)" />
+          <circle cx="380" cy="75" r="3.5" fill="var(--glow)" />
+          <text x="14" y="94" fill="var(--muted-foreground)" fontSize="9" letterSpacing="2">
+            {route.from}
           </text>
-          <text x="358" y="112" fill="var(--muted-foreground)" fontSize="9" letterSpacing="2">
-            DEL
+          <text x="366" y="94" fill="var(--muted-foreground)" fontSize="9" letterSpacing="2">
+            {route.to}
           </text>
           {inView && !reduce && (
             <circle r="3" fill="var(--glow)">
@@ -359,13 +391,13 @@ function TriplyticsVisual() {
         </svg>
       </div>
 
-      <div className="border-t border-line pt-5">
+      <div className="border-t border-line pt-3">
         <div className="flex items-end justify-between">
           <div>
             <div className="text-[9px] tracking-[0.25em] text-muted-foreground">
-              PREDICTED FARE — BLR → DEL
+              PREDICTED FARE — {route.from} → {route.to}
             </div>
-            <div className="mt-1 font-display text-4xl font-extrabold tabular-nums">
+            <div className="mt-1 font-display text-3xl font-extrabold tabular-nums text-foreground">
               ₹{fare.toLocaleString("en-IN")}
             </div>
           </div>
@@ -373,8 +405,6 @@ function TriplyticsVisual() {
             R² 0.99
             <br />
             RANDOM FOREST
-            <br />
-            480K+ RECORDS
           </div>
         </div>
         <input
@@ -383,11 +413,11 @@ function TriplyticsVisual() {
           max={100}
           value={t}
           onChange={(e) => setT(Number(e.target.value))}
-          className="fare-slider mt-5"
+          className="fare-slider mt-4"
           aria-label="Departure timing"
         />
-        <div className="mt-2 flex justify-between text-[9px] tracking-[0.2em] text-muted-foreground">
-          <span>BOOKING FAR AHEAD</span>
+        <div className="mt-1.5 flex justify-between text-[9px] tracking-[0.2em] text-muted-foreground">
+          <span>EARLY BOOKING</span>
           <span>LAST MINUTE</span>
         </div>
       </div>
@@ -398,103 +428,86 @@ function TriplyticsVisual() {
 /* ---------------- 04 — TaskPro (lifecycle) ---------------- */
 
 const STAGES = [
-  { name: "CREATED", note: "Task #142 — Auth flow" },
-  { name: "ASSIGNED", note: "Owner set — Kopal V." },
-  { name: "IN PROGRESS", note: "Branch feat/auth opened" },
-  { name: "COMPLETED", note: "Merged → main" },
+  { name: "CREATED", note: "Task #142 — Auth & DB schema initialized" },
+  { name: "ASSIGNED", note: "Assignee set: Kopal V." },
+  { name: "IN PROGRESS", note: "Branch feat/auth merged to dev" },
+  { name: "COMPLETED", note: "Code reviewed & merged → main" },
 ];
 
 function TaskProVisual() {
-  const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
 
-  useEffect(() => {
-    if (reduce) return;
-    const id = setInterval(() => setActive((a) => (a + 1) % STAGES.length), 1600);
-    return () => clearInterval(id);
-  }, [reduce]);
+  function nextStage() {
+    setActive((a) => (a + 1) % STAGES.length);
+  }
 
   return (
-    <div className="flex h-full flex-col justify-center gap-10 p-8 pt-12 md:p-10 md:pt-14">
-      <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
+    <div className="flex h-full flex-col justify-center gap-6 p-6 pt-10 md:p-8 md:pt-12">
+      <div className="flex justify-between text-[9px] tracking-[0.25em] text-muted-foreground">
+        <span>TASK LIFECYCLE DEMO</span>
+        <button
+          type="button"
+          onClick={nextStage}
+          className="rounded border border-iris/40 bg-iris/10 px-2.5 py-0.5 text-[9px] text-iris transition-colors hover:bg-iris hover:text-primary-foreground"
+        >
+          NEXT STAGE →
+        </button>
+      </div>
+
+      <div className="flex items-center justify-between gap-2">
         {STAGES.map((s, i) => {
           const done = i < active;
           const isActive = i === active;
           return (
-            <div key={s.name} className="flex flex-1 items-center gap-3 sm:flex-col sm:items-start">
-              <div className="flex items-center gap-3 sm:w-full">
+            <button
+              key={s.name}
+              type="button"
+              onClick={() => setActive(i)}
+              className="flex flex-1 flex-col items-center gap-2 text-center focus:outline-none"
+            >
+              <div className="relative flex w-full items-center justify-center">
                 <span
                   className={cn(
-                    "h-2.5 w-2.5 shrink-0 rounded-full border transition-all duration-500",
+                    "h-3 w-3 shrink-0 rounded-full border transition-all duration-300",
                     done && "border-glow bg-glow/70",
-                    isActive && "border-iris bg-iris shadow-[0_0_12px_var(--iris)]",
+                    isActive && "border-iris bg-iris shadow-[0_0_12px_var(--emerald)] scale-110",
                     !done && !isActive && "border-line bg-transparent",
                   )}
                 />
-                <div className="h-px flex-1 bg-line sm:w-full sm:flex-1">
-                  {i < STAGES.length - 1 && (
-                    <div
-                      className={cn(
-                        "h-px bg-iris transition-all duration-700",
-                        i < active ? "w-full" : "w-0",
-                      )}
-                    />
-                  )}
-                </div>
               </div>
               <span
                 className={cn(
-                  "whitespace-nowrap text-[9px] tracking-[0.2em] transition-colors duration-500 sm:mt-2",
-                  isActive ? "text-foreground" : done ? "text-muted-foreground" : "text-muted-foreground/40",
+                  "whitespace-nowrap text-[8px] tracking-[0.15em] transition-colors",
+                  isActive ? "font-bold text-foreground" : done ? "text-muted-foreground" : "text-muted-foreground/40",
                 )}
               >
                 {s.name}
               </span>
-            </div>
+            </button>
           );
         })}
       </div>
 
-      <div className="border border-line p-5">
+      <div className="border border-line bg-background/40 p-4">
         <div className="flex items-center justify-between">
           <span className="text-[9px] tracking-[0.25em] text-muted-foreground">TASK #142</span>
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={STAGES[active]?.name ?? ""}
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.25 }}
-              className={cn(
-                "rounded-full border px-2.5 py-0.5 text-[9px] tracking-[0.2em]",
-                active === STAGES.length - 1
-                  ? "border-glow text-glow"
-                  : "border-iris text-iris",
-              )}
-            >
-              {STAGES[active]?.name}
-            </motion.span>
-          </AnimatePresence>
+          <span
+            className={cn(
+              "rounded-full border px-2.5 py-0.5 text-[9px] tracking-[0.2em]",
+              active === STAGES.length - 1 ? "border-glow text-glow" : "border-iris text-iris",
+            )}
+          >
+            {STAGES[active]?.name}
+          </span>
         </div>
-        <div className="mt-3 h-6">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={STAGES[active]?.note ?? ""}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="text-sm font-light text-foreground/80"
-            >
-              {STAGES[active]?.note}
-            </motion.div>
-          </AnimatePresence>
+        <div className="mt-2.5 text-xs font-light text-foreground">
+          {STAGES[active]?.note}
         </div>
-        <div className="mt-4 h-px bg-line">
+        <div className="mt-3.5 h-px bg-line">
           <motion.div
             className="h-px bg-iris"
             animate={{ width: `${((active + 1) / STAGES.length) * 100}%` }}
-            transition={{ duration: 0.6, ease: EASE }}
+            transition={{ duration: 0.5, ease: EASE }}
           />
         </div>
       </div>
@@ -513,6 +526,8 @@ const PROJECTS: SceneProps[] = [
     description:
       "Full-stack AI platform combining ATS analysis, AI resume improvement, personalized cover letters, interview assessments and industry insights — one pipeline from raw resume to interview-ready.",
     visualLabel: "SCENE 01 — ATS ANALYSIS",
+    codeUrl: "https://github.com/kopal-vajp/PathPilot.git",
+    liveUrl: "https://pathpilot-vert.vercel.app/",
   },
   {
     index: "02",
@@ -522,6 +537,8 @@ const PROJECTS: SceneProps[] = [
     description:
       "AI-driven notification intelligence that predicts message receptivity and routes each message across SMS, Email and WhatsApp — the right channel, at the right moment, with a confidence score.",
     visualLabel: "SCENE 02 — MESSAGE ROUTING",
+    codeUrl: "https://github.com/kopal-vajp/K2R-Coders.git",
+    liveUrl: "https://messageemind.vercel.app/",
     flip: true,
   },
   {
@@ -532,6 +549,8 @@ const PROJECTS: SceneProps[] = [
     description:
       "Preprocessing and feature-engineering pipelines over 480K+ flight and train records, with Random Forest regression models achieving R² up to 0.99. Drag the slider — the model answers.",
     visualLabel: "SCENE 03 — FARE PREDICTION",
+    codeUrl:
+      "https://github.com/Rishwik-Mishra/Triplytics-ML-Powered-Tourism-Trend-Price-Prediction-Platform.git",
   },
   {
     index: "04",
@@ -541,24 +560,25 @@ const PROJECTS: SceneProps[] = [
     description:
       "Task management platform with authentication, task assignment, full CRUD operations and a relational MySQL database design — an early system that taught me data modeling discipline.",
     visualLabel: "SCENE 04 — TASK LIFECYCLE",
+    codeUrl: "https://github.com/kopal-vajp/Task-Pro.git",
     flip: true,
   },
 ];
 
 export function Projects() {
   return (
-    <section id="work" className="relative py-32 md:py-44">
+    <section id="work" className="relative py-28 md:py-36">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
         <Kicker index="03" label="SELECTED WORK" />
 
-        <Reveal className="mt-14">
+        <Reveal className="mt-10">
           <h2 className="max-w-3xl font-display text-[clamp(1.7rem,3.4vw,2.8rem)] font-bold leading-[1.1] tracking-tight">
             FOUR SYSTEMS,{" "}
             <span className="font-editorial font-normal italic text-iris">built end to end.</span>
           </h2>
         </Reveal>
 
-        <div className="mt-24 space-y-32 md:space-y-44">
+        <div className="mt-16 space-y-28 md:space-y-36">
           {PROJECTS.map((p) => (
             <Scene key={p.index} {...p}>
               {p.index === "01" && <PathPilotVisual />}

@@ -19,8 +19,8 @@ Personal portfolio showcasing AI-powered applications, data-driven systems, and 
 
 ```bash
 # Clone the repository
-git clone https://github.com/kopal-vajp/snap-start-portfolio.git
-cd snap-start-portfolio
+git clone https://github.com/kopal-vajp/Portfolio-website.git
+cd Portfolio-website
 
 # Install dependencies
 npm install

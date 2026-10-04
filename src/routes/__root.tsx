@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Kopal Vajpayee — Computer Science × AI × Software" },
+      { title: "Kopal's Portfolio" },
       {
         name: "description",
         content:
           "Portfolio of Kopal Vajpayee — CS undergraduate at NMIT building AI-powered applications, data-driven systems and full-stack products.",
       },
       { name: "author", content: "Kopal Vajpayee" },
-      { property: "og:title", content: "Kopal Vajpayee — Computer Science × AI × Software" },
+      { property: "og:title", content: "Kopal's Portfolio" },
       {
         property: "og:description",
         content: "I build software that solves real problems. AI/ML, data systems and full-stack engineering.",
@@ -98,6 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

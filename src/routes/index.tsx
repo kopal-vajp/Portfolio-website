@@ -14,7 +14,7 @@ import { Contact } from "@/components/Contact";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Kopal Vajpayee — Computer Science × AI × Software" },
+      { title: "Kopal's Portfolio" },
       {
         name: "description",
         content:
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Kopal Vajpayee — Computer Science × AI × Software",
+        content: "Kopal's Portfolio",
       },
       {
         property: "og:description",

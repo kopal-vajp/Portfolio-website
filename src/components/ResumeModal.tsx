@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { EASE } from "./primitives";
 
-const DRIVE_ID = "1o3A6mcDTg8ISi1HKKalgxRtD5aSnpIEJ";
+const DRIVE_ID = "1hwia8fuH4G3rgMJxiIHFM0Y2rflPJmwX";
 const PREVIEW = `https://drive.google.com/file/d/${DRIVE_ID}/preview`;
 const DOWNLOAD = `https://drive.google.com/uc?export=download&id=${DRIVE_ID}`;
 

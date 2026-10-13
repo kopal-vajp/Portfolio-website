@@ -10,7 +10,7 @@ const SOCIALS = [
   { label: "GITHUB", href: "https://github.com/kopal-vajp" },
   {
     label: "RESUME",
-    href: "https://drive.google.com/file/d/1o3A6mcDTg8ISi1HKKalgxRtD5aSnpIEJ/view?usp=sharing",
+    href: "https://drive.google.com/file/d/1hwia8fuH4G3rgMJxiIHFM0Y2rflPJmwX/view?usp=sharing",
   },
 ];
 

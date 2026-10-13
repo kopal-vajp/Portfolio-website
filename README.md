@@ -2,7 +2,7 @@
 
 Personal portfolio showcasing AI-powered applications, data-driven systems, and full-stack engineering. Built with an editorial dark aesthetic, fluid typography, and interactive micro-animations.
 
-🌐 **Live Demo:** [Add your live link here](https://kopalvajp.vercel.app/)
+🌐 **Live Demo:** [https://kopalvajp.vercel.app/]
 
 ---
 
